@@ -1,0 +1,50 @@
+<MyScreenManager>:
+    FirstScreen:
+    SecondScreen:
+    ThirdScreen:
+    FourthScreen:
+
+<FirstScreen>:
+    name: '_first_screen_'
+    GridLayout:
+        cols:1
+        GridLayout:
+            cols:2
+            Label:
+                text: "Part Number:"
+            TextInput:
+                text: ""
+        GridLayout:
+            cols:1
+            Button:
+                text: "Submit"
+            Button:
+                text: "Next Screen"
+                on_press: app.root.current = '_second_screen_'
+    
+
+<SecondScreen>:
+    name: '_second_screen_'
+    Label:
+        id: second_screen_label
+        text: "Hi I'm The Second Screen"
+    Button:
+        text: "Go to the third screen"
+        on_press: app.root.current = '_third_screen_'
+
+<ThirdScreen>:
+    name: '_third_screen_'
+    GridLayout:
+        cols:1
+        Label:
+            id: third_screen_label
+            text: "Hi I'm The Third Screen"
+        Button:
+            text: "go home"
+            on_press: app.root.current = '_first_screen_'
+
+<FourthScreen>:
+    name: '_fourth_screen_'
+    Label:
+        id: fourth_screen_label
+        text: "Hi I'm The Fourth Screen"
