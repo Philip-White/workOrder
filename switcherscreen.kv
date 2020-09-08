@@ -5,19 +5,22 @@
     FourthScreen:
 
 <FirstScreen>:
+
     name: '_first_screen_'
     GridLayout:
         cols:1
         GridLayout:
             cols:2
             Label:
-                text: "Part Number:"
+                text: "Part Description:"
             TextInput:
-                text: ""
+                id: part
+                multiline: False
         GridLayout:
             cols:1
             Button:
                 text: "Submit"
+                on_press: root.pressed()
             Button:
                 text: "Next Screen"
                 on_press: app.root.current = '_second_screen_'
