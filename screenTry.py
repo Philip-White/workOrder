@@ -12,7 +12,36 @@ from kivy.clock import Clock
 
 
 class FirstScreen(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super(FirstScreen, self).__init__(**kwargs)
+        self.make_sure = True # this is set so you can't keep making calls and piling up more 
+                                     # and more widgets that won't go away!!
+
+    def pressed(self, instance):
+        if self.make_sure != False:
+            part = self.inner.rows1.text + '%'
+            if part == '%':
+                return
+            else:    
+                with sqlite3.connect("backUp.sqlite") as db:
+                    cursor = db.cursor()
+                rows = cursor.execute('select "Part Descripion" from backUp where "Part Descripion" like? limit 20', (part,))
+                self.rows2 = cursor.fetchall()
+
+                self.results = GridLayout()
+                self.results.cols = 2
+                for x in self.rows2:
+                    self.results.add_widget(Label(text=str(x[0])))
+                self.add_widget(self.results)  
+                self.make_sure = False  
+        else:
+            return
+
+    def cleared(self, instance):
+        if self.make_sure != True:
+            self.results.clear_widgets()
+            self.remove_widget(self.results)
+            self.make_sure = True
 class SecondScreen(Screen):
     pass
 
