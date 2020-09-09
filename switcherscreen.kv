@@ -27,33 +27,11 @@
             Button:
                 text: "Next Screen"
                 on_press: app.root.current = '_second_screen_'
-            GridLayout:
-                cols:2
-                TextInput:
-                    id: results
-                    multiline: False
-                    text: 
-                TextInput:
-                    id: results1
-                    multiline: False
-                    text:
-                TextInput:
-                    id: results2
-                    multiline: False
-                    text:
-                TextInput:
-                    id: results3
-                    multiline: False
-                    text:
-                TextInput:
-                    id: results4
-                    multiline: False
-                    text:
-                TextInput:
-                    id: results5
-                    multiline: False
-                    text:
-
+        GridLayout:
+            id: last_thing
+            cols: 2
+            
+            
 <SecondScreen>:
     name: '_second_screen_'
     Label:

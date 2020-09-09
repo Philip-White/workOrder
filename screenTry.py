@@ -31,30 +31,20 @@ class FirstScreen(Screen):
             else:    
                 with sqlite3.connect("backUp.sqlite") as db:
                     cursor = db.cursor()
-                rows = cursor.execute('select "Part Descripion" from backUp where "Part Descripion" like? limit 20', (part,))
+                rows = cursor.execute('select "Part Descripion" from backUp where "Part Descripion" like? limit 15', (part,))
                 self.rows2 = cursor.fetchall()
-
-                
-                self.ids.results.text = str(self.rows2[0][0])
-                self.ids.results1.text = str(self.rows2[1][0])
-                self.ids.results2.text = str(self.rows2[2][0])
-                self.ids.results3.text = str(self.rows2[3][0])
-                self.ids.results4.text = str(self.rows2[4][0])
-                self.ids.results5.text = str(self.rows2[5][0])
-                self.make_sure = False  
+                if self.rows2:
+                    for x in self.rows2:
+                        self.ids.last_thing.add_widget(Label(text=str(x[0])))
+                    self.make_sure = False
+                else:
+                    return      
         else:
             return
 
-
     def cleared(self):
         if self.make_sure != True:
-            self.ids.results.text = ''
-            self.ids.results1.text = ''
-            self.ids.results2.text = ''
-            self.ids.results3.text = ''
-            self.ids.results4.text = ''
-            self.ids.results5.text = ''
-            
+            self.ids.last_thing.clear_widgets()
             self.make_sure = True
  
 class SecondScreen(Screen):
