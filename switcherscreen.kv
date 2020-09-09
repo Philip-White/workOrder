@@ -22,11 +22,37 @@
                 text: "Submit"
                 on_press: root.pressed()
             Button:
+                text: "clear results"
+                on_press: root.cleared()
+            Button:
                 text: "Next Screen"
                 on_press: app.root.current = '_second_screen_'
-        
-
-
+            GridLayout:
+                cols:2
+                TextInput:
+                    id: results
+                    multiline: False
+                    text: 
+                TextInput:
+                    id: results1
+                    multiline: False
+                    text:
+                TextInput:
+                    id: results2
+                    multiline: False
+                    text:
+                TextInput:
+                    id: results3
+                    multiline: False
+                    text:
+                TextInput:
+                    id: results4
+                    multiline: False
+                    text:
+                TextInput:
+                    id: results5
+                    multiline: False
+                    text:
 
 <SecondScreen>:
     name: '_second_screen_'
