@@ -6,7 +6,6 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.clock import Clock
 
 
 
@@ -20,7 +19,7 @@ class FirstScreen(Screen):
                                      # and more widgets that won't go away!!
         
 
-    def pressed(self):
+    def pressed(self):#This is triggered from the submit button
         
 
 
@@ -42,7 +41,7 @@ class FirstScreen(Screen):
         else:
             return
 
-    def cleared(self):
+    def cleared(self):#This is triggered by the 'clear results' button
         if self.make_sure != True:
             self.ids.last_thing.clear_widgets()
             self.make_sure = True
