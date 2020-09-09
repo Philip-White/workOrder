@@ -21,9 +21,27 @@ class FirstScreen(Screen):
         
 
     def pressed(self):
-        liquor = self.ids.part.text
-        parts = self.add_widget(Label(text=str(liquor)))
-        return parts
+        
+
+
+        if self.make_sure != False:
+            part = self.ids.part.text + '%'
+            if part == '%':
+                return
+            else:    
+                with sqlite3.connect("backUp.sqlite") as db:
+                    cursor = db.cursor()
+                rows = cursor.execute('select "Part Descripion" from backUp where "Part Descripion" like? limit 20', (part,))
+                self.rows2 = cursor.fetchall()
+
+                self.results = GridLayout()
+                self.results.cols = 2
+                for x in self.rows2:
+                    self.results.add_widget(Label(text=str(x[0])))
+                self.add_widget(self.results)  
+                self.make_sure = False  
+        else:
+            return
  
 class SecondScreen(Screen):
     pass
