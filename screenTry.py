@@ -6,9 +6,12 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
+from functools import partial
 
-
-
+class P(FloatLayout):
+    pass
 
 class FirstScreen(Screen):
     
@@ -18,6 +21,14 @@ class FirstScreen(Screen):
         self.make_sure = True # this is set so you can't keep making calls and piling up more 
                                      # and more widgets that won't go away!!
         
+
+    def show_popup(self,instance):
+        show = P() # Create a new instance of the P class 
+
+        popupWindow = Popup(title="Popup Window", content=show, size_hint=(None,None),size=(400,400)) 
+        # Create the popup window
+
+        popupWindow.open() # show the popup
 
     def pressed(self):#This is triggered from the submit button
         
@@ -34,7 +45,9 @@ class FirstScreen(Screen):
                 self.rows2 = cursor.fetchall()
                 if self.rows2:
                     for x in self.rows2:
-                        self.ids.last_thing.add_widget(Label(text=str(x[0])))
+                        stuff = Button(text=str(x[0]))
+                        stuff.bind(on_press=self.show_popup)
+                        self.ids.last_thing.add_widget(stuff)
                     self.make_sure = False
                 else:
                     return      
