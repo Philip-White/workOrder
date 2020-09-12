@@ -10,11 +10,9 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from functools import partial
 
-class P(FloatLayout):
-    pass
 
 class FirstScreen(Screen):
-    
+    namers = []
     
     def __init__(self, **kwargs):
         super(FirstScreen, self).__init__(**kwargs)
@@ -23,16 +21,15 @@ class FirstScreen(Screen):
         
 
     def show_popup(self,instance):
-        show = P() # Create a new instance of the P class 
-
-        popupWindow = Popup(title="Popup Window", content=show, size_hint=(None,None),size=(400,400)) 
+        global namers
+        premo = namers
+        popupWindow = Popup(title="Popup Window", content=Label(text=str(premo[1])), size_hint=(None,None),size=(400,400)) 
         # Create the popup window
 
         popupWindow.open() # show the popup
 
     def pressed(self):#This is triggered from the submit button
-        
-
+        global namers
 
         if self.make_sure != False:
             part = self.ids.part.text + '%'
@@ -44,10 +41,12 @@ class FirstScreen(Screen):
                 rows = cursor.execute('select "Part Descripion" from backUp where "Part Descripion" like? limit 15', (part,))
                 self.rows2 = cursor.fetchall()
                 if self.rows2:
+                    namers = []
                     for x in self.rows2:
                         stuff = Button(text=str(x[0]))
                         stuff.bind(on_press=self.show_popup)
                         self.ids.last_thing.add_widget(stuff)
+                        namers.append(stuff.text)
                     self.make_sure = False
                 else:
                     return      
