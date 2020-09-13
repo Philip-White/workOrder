@@ -12,7 +12,6 @@ from functools import partial
 
 
 class FirstScreen(Screen):
-    namers = []
     
     def __init__(self, **kwargs):
         super(FirstScreen, self).__init__(**kwargs)
@@ -20,16 +19,33 @@ class FirstScreen(Screen):
                                      # and more widgets that won't go away!!
         
 
-    def show_popup(self,instance):
-        global namers
-        premo = namers
-        popupWindow = Popup(title="Popup Window", content=Label(text=str(premo[1])), size_hint=(None,None),size=(400,400)) 
+    def one(self):
+        show_one = self.ids.one.text
+        popupWindow1 = Popup(title="Popup Window", content=Label(text=str(show_one)), size_hint=(None,None),size=(400,400)) 
         # Create the popup window
 
-        popupWindow.open() # show the popup
+        popupWindow1.open() # show the popup
+        self.make_sure = False
+
+
+    def two(self):
+        show_two = self.ids.two.text
+        popupWindow2 = Popup(title="Popup Window", content=Label(text=str(show_two)), size_hint=(None,None),size=(400,400)) 
+        # Create the popup window
+
+        popupWindow2.open() # show the popup
+        self.make_sure = False
+
+    def three(self):
+        show_three = self.ids.three.text
+        popupWindow3 = Popup(title="Popup Window", content=Label(text=str(show_three)), size_hint=(None,None),size=(400,400)) 
+        # Create the popup window
+
+        popupWindow3.open() # show the popup
+        self.make_sure = False
+
 
     def pressed(self):#This is triggered from the submit button
-        global namers
 
         if self.make_sure != False:
             part = self.ids.part.text + '%'
@@ -38,15 +54,18 @@ class FirstScreen(Screen):
             else:    
                 with sqlite3.connect("backUp.sqlite") as db:
                     cursor = db.cursor()
-                rows = cursor.execute('select "Part Descripion" from backUp where "Part Descripion" like? limit 15', (part,))
+                rows = cursor.execute('select "Part Descripion" from backUp where "Part Descripion" like? limit 3', (part,))
                 self.rows2 = cursor.fetchall()
                 if self.rows2:
-                    namers = []
                     for x in self.rows2:
-                        stuff = Button(text=str(x[0]))
-                        stuff.bind(on_press=self.show_popup)
-                        self.ids.last_thing.add_widget(stuff)
-                        namers.append(stuff.text)
+                        #stuff = Button(text=str(x[0]))
+                        #stuff.bind(on_press=self.show_popup)
+                        #self.ids.last_thing.add_widget(stuff)
+                        #namers.append(stuff.text)
+                        one, two, three = self.rows2
+                        self.ids.one.text = str(one[0])
+                        self.ids.two.text = str(two[0])
+                        self.ids.three.text = str(three[0])
                     self.make_sure = False
                 else:
                     return      
@@ -55,7 +74,10 @@ class FirstScreen(Screen):
 
     def cleared(self):#This is triggered by the 'clear results' button
         if self.make_sure != True:
-            self.ids.last_thing.clear_widgets()
+            #self.ids.last_thing.clear_widgets()
+            self.ids.one.text = ''
+            self.ids.two.text = ''
+            self.ids.three.text = ''
             self.make_sure = True
  
 class SecondScreen(Screen):

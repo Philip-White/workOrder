@@ -30,6 +30,19 @@
         GridLayout:
             id: last_thing
             cols: 2
+            Button:
+                id: one
+                text:
+                on_press: root.one()
+            Button:
+                id: two
+                text:
+                on_press: root.two()
+
+            Button:
+                id: three
+                text:
+                on_press: root.three()
             
             
 <SecondScreen>:
@@ -57,3 +70,4 @@
     Label:
         id: fourth_screen_label
         text: "Hi I'm The Fourth Screen"
+
