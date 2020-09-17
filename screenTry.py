@@ -8,7 +8,7 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
-from functools import partial
+from kivy.uix.boxlayout import BoxLayout
 
 
 class FirstScreen(Screen):
@@ -21,7 +21,11 @@ class FirstScreen(Screen):
 
     def one(self):
         show_one = self.ids.one.text
-        popupWindow1 = Popup(title="Popup Window", content=Label(text=str(show_one)), size_hint=(None,None),size=(400,400)) 
+        the_popup_layout = GridLayout()
+        the_popup_layout.cols = 1
+        the_popup_layout.add_widget(Label(text='Would you like to add this to the list?'))
+        the_popup_layout.add_widget(Label(text=str(show_one)))
+        popupWindow1 = Popup(title="Popup Window", content=the_popup_layout, size_hint=(None,None),size=(400,400)) 
         # Create the popup window
 
         popupWindow1.open() # show the popup
