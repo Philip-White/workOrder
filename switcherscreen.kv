@@ -73,12 +73,16 @@
 
 <OurPopop>:
     Label:
-        text: "You pressed the button"
+        text: "Would you like to add this item to your work order?"
         size_hint: 0.6, 0.2
         pos_hint: {"x":0.2, "top":1}
-
     Button:
-        id: the_item
-        text: 
+        id: nothing
+        text: "Yes"
+        size_hint: 0.8, 0.2
+        pos_hint: {"x":0.1, "y":0.3}
+    Button:
+        id: wooyeah
+        text: "No"
         size_hint: 0.8, 0.2
         pos_hint: {"x":0.1, "y":0.1}

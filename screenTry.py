@@ -10,6 +10,8 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 
+class OurPopop(FloatLayout):
+    pass
 
 class FirstScreen(Screen):
     
@@ -20,12 +22,11 @@ class FirstScreen(Screen):
         
 
     def one(self):
+        p = OurPopop()
         show_one = self.ids.one.text
-        the_popup_layout = GridLayout()
-        the_popup_layout.cols = 1
-        the_popup_layout.add_widget(Label(text='Would you like to add this to the list?'))
-        the_popup_layout.add_widget(Label(text=str(show_one)))
-        popupWindow1 = Popup(title="Popup Window", content=the_popup_layout, size_hint=(None,None),size=(400,400)) 
+        a_label = Label(text=str(show_one), pos_hint= {"x":0.01, "y":0.1})
+        p.add_widget(a_label)
+        popupWindow1 = Popup(title="Popup Window", content=p, size_hint=(None,None),size=(400,400)) 
         # Create the popup window
 
         popupWindow1.open() # show the popup
@@ -33,16 +34,22 @@ class FirstScreen(Screen):
 
 
     def two(self):
+        p = OurPopop()
         show_two = self.ids.two.text
-        popupWindow2 = Popup(title="Popup Window", content=Label(text=str(show_two)), size_hint=(None,None),size=(400,400)) 
+        a_label = Label(text=str(show_two), pos_hint= {"x":0.01, "y":0.1})
+        p.add_widget(a_label)
+        popupWindow2 = Popup(title="Popup Window", content=p, size_hint=(None,None),size=(400,400)) 
         # Create the popup window
 
         popupWindow2.open() # show the popup
         self.make_sure = False
 
     def three(self):
+        p = OurPopop()
         show_three = self.ids.three.text
-        popupWindow3 = Popup(title="Popup Window", content=Label(text=str(show_three)), size_hint=(None,None),size=(400,400)) 
+        a_label = Label(text=str(show_three), pos_hint= {"x":0.01, "y":0.1})
+        p.add_widget(a_label)
+        popupWindow3 = Popup(title="Popup Window", content=p, size_hint=(None,None),size=(400,400)) 
         # Create the popup window
 
         popupWindow3.open() # show the popup
